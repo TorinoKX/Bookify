@@ -1,0 +1,14 @@
+{
+    "web": {
+        "client_id": "670464036118-4b5vfpq4vl2cks24ci755t9uqqu0sa5v.apps.googleusercontent.com",
+        "project_id": "ict-assignment-2-351811",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "scope": "https://www.googleapis.com/auth/books",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_secret": "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",
+        "redirect_uri": "https://s5038261.elf.ict.griffith.edu.au:3000",
+        "javascript_origin": "https://s5038261.elf.ict.griffith.edu.au:3000"
+    },
+    "api_key": "AIzaSyAQuYcHEWyMn4wdcIARNDRXOvS_uhoU504"
+}

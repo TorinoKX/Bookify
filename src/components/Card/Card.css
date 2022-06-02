@@ -1,0 +1,28 @@
+.Card {
+    width: 15rem; 
+    outline-style: solid; 
+    outline-offset: 2px; 
+    outline-width: 1px; 
+    border-radius: 0.125rem; 
+    margin: 2rem;
+}
+
+.CardImage {
+    --tw-bg-opacity: 1; 
+    background-color: rgb(203 213 225 / var(--tw-bg-opacity)); 
+    width: 15rem; 
+    height: 12rem;
+    display: flex; 
+    justify-content: center;
+}
+
+.Image {
+    object-fit: contain;
+    width: 15rem;
+}
+
+.CardName {
+    text-align: center; 
+    font-weight: 500; 
+    text-transform: capitalize;
+}
