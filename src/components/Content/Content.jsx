@@ -77,8 +77,11 @@ class Content extends React.Component {
         console.log(urlParams)
         if (urlParams.has('access_token')) {
             console.log("true")
-            this.setState({ isLoggedIn: true, accessToken: urlParams.get('access_token') })
-            console.log(this.state.accessToken)
+            let accessToken = urlParams.get('access_token') 
+            console.log(accessToken)
+            this.setState({ isLoggedIn: true, accessToken: accessToken }, () => {
+                console.log(this.state)
+            })
         }
         else {
             console.log("false")

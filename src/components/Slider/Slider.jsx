@@ -21,7 +21,7 @@ class Slider extends React.Component {
                     return <SwiperSlide
                         key={slide + index}
                         virtualIndex={index}>
-                        <Card slide={slide} isLoggedIn={this.props.isLoggedIn} dropDown={this.props.dropDown}/>
+                        <Card slide={slide} isLoggedIn={this.props.isLoggedIn} dropDown={this.props.dropDown} books={this.props.books} />
                     </SwiperSlide>
                 })}
             </Swiper>

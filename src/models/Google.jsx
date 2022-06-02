@@ -37,17 +37,18 @@ export function oauthSignIn() {
 }
 
 export async function getBookshelves(token) {
-    const resp = await fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=${googleAPI.api_key}`, {
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves?key=${googleAPI.api_key}`, {
         headers: {
-            "Authentication": `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
     });
     const data = await resp.json();
-    if (data.status === null) {
+    console.log(data)
+    if (!data.items) {
         console.log('retrieving data')
         return getBookshelves(token)
     }
-    else if (data.status === "OK") {
+    else {
         console.log(data);
         console.log(data.items)
         return data.items
@@ -55,9 +56,9 @@ export async function getBookshelves(token) {
 }
 
 export async function getBooksFromShelf(shelf, token) {
-    const resp = await fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelf}/volumes?key=${googleAPI.api_key}`, {
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/volumes?key=${googleAPI.api_key}`, {
         headers: {
-            "Authentication": `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
     });
     const data = await resp.json();
@@ -73,7 +74,7 @@ export async function getBooksFromShelf(shelf, token) {
 }
 
 export function addBookToShelf(shelf, bookID, token) {
-    fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelf}/addVolume?volumeId=${bookID}&key=${googleAPI.api_key}`, {
+    fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/addVolume?volumeId=${bookID}&key=${googleAPI.api_key}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ export function addBookToShelf(shelf, bookID, token) {
 }
 
 export function removeBookFromShelf(shelf, bookID, token) {
-    fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelf}/removeVolume?volumeId=${bookID}&key=${googleAPI.api_key}`, {
+    fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/removeVolume?volumeId=${bookID}&key=${googleAPI.api_key}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ export function removeBookFromShelf(shelf, bookID, token) {
 }
 
 export async function searchBookByISBN(isbn) {
-    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}?key=${googleAPI.api_key}`);
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=isbn:${isbn}?key=${googleAPI.api_key}`);
     const data = await resp.json();
     if (data.status === null) {
         console.log('retrieving data')
@@ -107,7 +108,7 @@ export async function searchBookByISBN(isbn) {
 }
 
 export async function searchBookByName(bookName) {
-    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookName}?key=${googleAPI.api_key}`);
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=${bookName}?key=${googleAPI.api_key}`);
     const data = await resp.json();
     if (data.status === null) {
         console.log('retrieving data')

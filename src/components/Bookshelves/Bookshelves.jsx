@@ -13,12 +13,29 @@ class Bookshelves extends React.Component {
         };
     }
 
-    componentDidMount() {
-        if (!this.state.bookShelvesLoaded) {
-            Google.getBookshelves(this.props.accessToken).then(bookShelves => {
-                this.setState({ bookShelves: bookShelves })
-            })
+    componentDidUpdate() {
+        if (!this.state.bookShelvesLoaded && this.props.accessToken) {
+            this.getBookShelves();
         }
+    }
+
+    getBookShelves = () => {
+        Google.getBookshelves(this.props.accessToken).then(bookShelves => {
+            // let parsedShelves = bookShelves.map(bookshelf => {
+            //     let books = this.parseBookShelf(bookshelf);
+            //     return { ...bookshelf, books: books }
+            // })
+            this.setState({ bookShelves: bookShelves, bookShelvesLoaded: true })
+            console.log(this.state.bookShelves)
+        })
+    }
+
+    parseBookShelf = async (bookShelf) => {
+        let books;
+        Google.getBooksFromShelf(bookShelf.id, this.props.accessToken).then((shelfBooks) => {
+            books = shelfBooks;
+            return books
+        });
     }
 
     render() {
@@ -32,7 +49,7 @@ class Bookshelves extends React.Component {
                 }
                 {this.props.isLoggedIn &&
                     <Slider slides={this.state.bookShelves.map(el => {
-                        return { name: `${el.title}`, image: "https://i.guim.co.uk/img/media/d305370075686a053b46f5c0e6384e32b3c00f97/0_50_5231_3138/master/5231.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=c83f68b473db6bb72cd8d50beb04addc" };
+                        return { name: `${el.title}`, books: el.books };
                     })} />
                 }
             </div>
