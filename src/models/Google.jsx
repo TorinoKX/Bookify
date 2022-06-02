@@ -36,28 +36,40 @@ export function oauthSignIn() {
     form.submit();
 }
 
-export function getBookshelves(token) {
-    fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=${googleAPI.api_key}`, {
+export async function getBookshelves(token) {
+    const resp = await fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=${googleAPI.api_key}`, {
         headers: {
             "Authentication": `Bearer ${token}`
         }
-    })
-        .then(response => response.json())
-        .then(data => {
-            return data.items
-        });
+    });
+    const data = await resp.json();
+    if (data.status === null) {
+        console.log('retrieving data')
+        return getBookshelves(token)
+    }
+    else if (data.status === "OK") {
+        console.log(data);
+        console.log(data.items)
+        return data.items
+    }
 }
 
-export function getBooksFromShelf(shelf, token) {
-    fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelf}/volumes?key=${googleAPI.api_key}`, {
+export async function getBooksFromShelf(shelf, token) {
+    const resp = await fetch(`https://www.googleapis.com/books/v1/mylibrary/bookshelves/${shelf}/volumes?key=${googleAPI.api_key}`, {
         headers: {
             "Authentication": `Bearer ${token}`
         }
-    })
-        .then(response => response.json())
-        .then(data => {
-            return data.items
-        });
+    });
+    const data = await resp.json();
+    if (data.status === null) {
+        console.log('retrieving data')
+        return getBooksFromShelf(shelf, token)
+    }
+    else if (data.status === "OK") {
+        console.log(data);
+        console.log(data.items)
+        return data.items
+    }
 }
 
 export function addBookToShelf(shelf, bookID, token) {
@@ -80,20 +92,30 @@ export function removeBookFromShelf(shelf, bookID, token) {
     })
 }
 
-export function searchBookByISBN(isbn) {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}?key=${googleAPI.api_key}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            return data.items
-        });
+export async function searchBookByISBN(isbn) {
+    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}?key=${googleAPI.api_key}`);
+    const data = await resp.json();
+    if (data.status === null) {
+        console.log('retrieving data')
+        return searchBookByISBN(isbn)
+    }
+    else if (data.status === "OK") {
+        console.log(data);
+        console.log(data.items)
+        return data.items
+    }
 }
 
-export function searchBookByName(bookName) {
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookName}?key=${googleAPI.api_key}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            return data.items
-        });
+export async function searchBookByName(bookName) {
+    const resp = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookName}?key=${googleAPI.api_key}`);
+    const data = await resp.json();
+    if (data.status === null) {
+        console.log('retrieving data')
+        return searchBookByName(bookName)
+    }
+    else if (data.status === "OK") {
+        console.log(data);
+        console.log(data.items)
+        return data.items
+    }
 }

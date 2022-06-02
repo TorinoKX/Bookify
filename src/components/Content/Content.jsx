@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Nyt from '../../models/Nyt'
-import Slider from '../Slider/Slider'
+import Bestsellers from '../Bestsellers/Bestsellers';
+import Bookshelves from '../Bookshelves/Bookshelves';
 //import PropTypes from 'prop-types';
 // import GoogleLogin from './GoogleLogin';
 
@@ -9,22 +10,25 @@ class Content extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-            slides: [],
-            gotSlides: false
+            allLists: [],
+            list: { name: "", books: [] },
+            gotSlides: false,
+            accessToken: ""
         };
     }
 
     componentDidMount() {
-        console.log(this.state.slides);
+        console.log(this.state.list);
         console.log(this.state.gotSlides);
         this.initLists();
-        // this.checkLoggedIn();
+        this.checkLoggedIn();
     }
 
     render() {
         return (
             <div className="Content">
-                <Slider slides={this.state.slides}/>
+                <Bestsellers list={this.state.list} allLists={this.state.allLists} changeList={this.changeList}/>
+                <Bookshelves isLoggedIn={this.state.isLoggedIn} accessToken={this.state.accessToken} />
             </div>
         );
     }
@@ -32,18 +36,40 @@ class Content extends React.Component {
     initLists() {
         console.log("initLists")
         if (!this.state.gotSlides) {
-            Nyt.getLists().then(data => {
-                let slides = data.map(function (obj) {
-                    return {
-                         name: obj.display_name,
-                         image: 'https://nytimes.com/vi-assets/static-assets/NYT-BestSeller-1200x675-699eb842421d5076f318fe0df3d903a5.png'
-                     };
-                 });
-                this.setState({ slides: slides })
-                console.log(slides);
+            Nyt.getLists().then(listData => {
+                console.log(listData)
+                this.setState({allLists: listData})
+                console.log(this.state.allLists)
+                Nyt.getListBooks(listData[0].list_name_encoded).then(bookData => {
+                    this.setState(
+                        {
+                            list: {
+                                name: listData[0].display_name,
+                                books: bookData.map(el => {
+                                    return { name: `${el.title} - ${el.author}`, image: el.book_image };
+                                })
+                            }
+                        }
+                    )
+                })
             }).catch(err => console.log(err));
             this.setState({ gotSlides: true })
         }
+    }
+
+    changeList = (list) => {
+        Nyt.getListBooks(list.list_name_encoded).then(bookData => {
+            this.setState(
+                {
+                    list: {
+                        name: list.display_name,
+                        books: bookData.map(el => {
+                            return { name: `${el.title} - ${el.author}`, image: el.book_image };
+                        })
+                    }
+                }
+            )
+        })
     }
 
     checkLoggedIn = () => {
@@ -51,7 +77,8 @@ class Content extends React.Component {
         console.log(urlParams)
         if (urlParams.has('access_token')) {
             console.log("true")
-            this.setState({ isLoggedIn: true })
+            this.setState({ isLoggedIn: true, accessToken: urlParams.get('access_token') })
+            console.log(this.state.accessToken)
         }
         else {
             console.log("false")

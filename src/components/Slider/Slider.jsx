@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper';
 import { Virtual } from 'swiper'
 import Card from '../Card/Card';
 import 'swiper/css'
+import 'swiper/css/navigation'
+import './Slider.css'
 
 class Slider extends React.Component {
     constructor(props) {
@@ -13,12 +16,12 @@ class Slider extends React.Component {
 
     render() {
         return (
-            <Swiper modules={[Virtual]} spaceBetween={50} slidesPerView={3} virtual>
+            <Swiper navigation={true} className="Slider" modules={[Virtual, Navigation]} spaceBetween={50} slidesPerView={4} virtual centeredSlides={true} centeredSlidesBounds={true}>
                 {this.props.slides.map((slide, index) => {
                     return <SwiperSlide
                         key={slide + index}
                         virtualIndex={index}>
-                        <Card slide={slide} isLoggedIn={this.props.isLoggedIn} />
+                        <Card slide={slide} isLoggedIn={this.props.isLoggedIn} dropDown={this.props.dropDown}/>
                     </SwiperSlide>
                 })}
             </Swiper>

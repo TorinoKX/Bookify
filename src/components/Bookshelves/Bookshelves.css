@@ -1,0 +1,12 @@
+
+
+.Title {
+    text-align: center; 
+    font-weight: 500; 
+    text-transform: capitalize;
+}
+
+.Bookshelves {
+    --tw-bg-opacity: 1; 
+    background-color: rgb(203 213 225 / var(--tw-bg-opacity)); 
+}

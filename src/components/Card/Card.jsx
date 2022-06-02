@@ -10,7 +10,7 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className="Card">
+            <div onClick={() => {if (this.props.isBookshelves) { this.props.dropDown() }}} className="Card">
                 <div className="CardImage">
                     <img className="Image" src={this.props.slide.image} alt="/" />
                 </div>
