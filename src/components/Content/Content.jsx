@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as Nyt from '../../models/Nyt'
 import Bestsellers from '../Bestsellers/Bestsellers';
 import Bookshelves from '../Bookshelves/Bookshelves';
+import Search from '../Search/Search';
 
 function Content() {
 
@@ -71,6 +72,7 @@ function Content() {
 
     return (
         <div className="Content">
+            <Search />
             <Bestsellers list={list} allLists={allLists} changeList={changeList} />
             <Bookshelves isLoggedIn={isLoggedIn} accessToken={accessToken} />
         </div>

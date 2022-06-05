@@ -95,7 +95,7 @@ export function removeBookFromShelf(shelf, bookID, token) {
 }
 
 export async function searchBookByISBN(isbn) {
-    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=isbn:${isbn}?key=`);
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=isbn:${isbn}&key=`);
     const data = await resp.json();
     if (data.status === null) {
         console.log('retrieving data')
@@ -109,15 +109,16 @@ export async function searchBookByISBN(isbn) {
 }
 
 export async function searchBookByName(bookName) {
-    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=${bookName}?key=`);
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=${bookName}&key=`);
     const data = await resp.json();
-    if (data.status === null) {
-        console.log('retrieving data')
-        return searchBookByName(bookName)
+    if (!data.items) {
+        console.log('Could not retrieve items')
+        console.log(data)
+        return []
     }
-    else if (data.status === "OK") {
+    else {
         console.log(data);
         console.log(data.items)
-        return data.items
+        return data.items || []
     }
 }
