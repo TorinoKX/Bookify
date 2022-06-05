@@ -8,25 +8,18 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import './Slider.css'
 
-class Slider extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
-        return (
-            <Swiper navigation={true} className="Slider" modules={[Virtual, Navigation]} spaceBetween={50} slidesPerView={4} virtual centeredSlides={true} centeredSlidesBounds={true}>
-                {this.props.slides.map((slide, index) => {
-                    return <SwiperSlide
-                        key={slide + index}
-                        virtualIndex={index}>
-                        <Card slide={slide} isLoggedIn={this.props.isLoggedIn} dropDown={this.props.dropDown} books={this.props.books} />
-                    </SwiperSlide>
-                })}
-            </Swiper>
-        );
-    }
+function Slider(props) {
+    return (
+        <Swiper navigation={true} className="Slider" modules={[Virtual, Navigation]} spaceBetween={50} slidesPerView={4} virtual centeredSlides={true} centeredSlidesBounds={true}>
+            {props.slides.map((slide, index) => {
+                return <SwiperSlide
+                    key={slide + index}
+                    virtualIndex={index}>
+                    <Card slide={slide} isLoggedIn={props.isLoggedIn} callback={props.callback} />
+                </SwiperSlide>
+            })}
+        </Swiper>
+    );
 }
 
 Slider.propTypes = {};

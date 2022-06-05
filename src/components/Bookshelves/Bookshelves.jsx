@@ -1,63 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Google from '../../models/Google'
+import Bookslist from '../BooksList/Bookslist';
 import Slider from '../Slider/Slider';
 import './Bookshelves.css'
-// import PropTypes from 'prop-types';
 
-class Bookshelves extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bookShelves: [],
-            bookShelvesLoaded: false
-        };
-    }
+function Bookshelves(props) {
+    const [bookShelves, setBookshelves] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [displayedBooks, setDisplayedBooks] = useState([])
 
-    componentDidUpdate() {
-        if (!this.state.bookShelvesLoaded && this.props.accessToken) {
-            this.getBookShelves();
-        }
-    }
-
-    getBookShelves = () => {
-        Google.getBookshelves(this.props.accessToken).then(bookShelves => {
-            // let parsedShelves = bookShelves.map(bookshelf => {
-            //     let books = this.parseBookShelf(bookshelf);
-            //     return { ...bookshelf, books: books }
-            // })
-            this.setState({ bookShelves: bookShelves, bookShelvesLoaded: true })
-            console.log(this.state.bookShelves)
+    let getBookShelves = async () => {
+        setIsLoading(true)
+        const retrievedBookshelves = await Google.getBookshelves(props.accessToken);
+        let shelvesParsed = 0;
+        retrievedBookshelves.forEach(async bookshelf => {
+            let books = await Google.getBooksFromShelf(bookshelf.id, props.accessToken);
+            console.log(books);
+            bookshelf.books = books;
+            shelvesParsed++;
+            if (shelvesParsed === retrievedBookshelves.length) {
+                setBookshelves(retrievedBookshelves);
+                console.log(retrievedBookshelves)
+                setIsLoaded(true)
+                setIsLoading(false)
+                console.log(bookShelves)
+            }
         })
     }
 
-    parseBookShelf = async (bookShelf) => {
-        let books;
-        Google.getBooksFromShelf(bookShelf.id, this.props.accessToken).then((shelfBooks) => {
-            books = shelfBooks;
-            return books
-        });
+    let dropDown = (bookshelf) => {
+        console.log(bookshelf)
+        setDisplayedBooks(bookshelf.books)
     }
 
-    render() {
-        return (
-            <div className="Bookshelves">
-                <h1 className="Title">Bookshelves</h1>
-                {!this.props.isLoggedIn &&
-                    <button onClick={Google.oauthSignIn}>
-                        <p>Login</p>
-                    </button>
-                }
-                {this.props.isLoggedIn &&
-                    <Slider slides={this.state.bookShelves.map(el => {
-                        return { name: `${el.title}`, books: el.books };
-                    })} />
-                }
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (!isLoaded && !isLoading && props.accessToken) {
+            console.log("bookshelves useEffect")
+            getBookShelves();
+        }
+    });
 
-
-
+    return (
+        <div className="Bookshelves">
+            <h1 className="Title">Bookshelves</h1>
+            {!props.isLoggedIn &&
+                <button onClick={Google.oauthSignIn}>
+                    <p>Login</p>
+                </button>
+            }
+            {props.isLoggedIn &&
+                <Slider slides={bookShelves.map(el => {
+                    return { name: `${el.title}`, books: el.books };
+                })} callback={dropDown} />
+            }
+            <Bookslist books={displayedBooks}/>
+        </div>
+    );
 }
 
 Bookshelves.propTypes = {};

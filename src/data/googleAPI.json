@@ -9,6 +9,5 @@
         "client_secret": "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",
         "redirect_uri": "https://s5038261.elf.ict.griffith.edu.au:3000",
         "javascript_origin": "https://s5038261.elf.ict.griffith.edu.au:3000"
-    },
-    "api_key": "AIzaSyAQuYcHEWyMn4wdcIARNDRXOvS_uhoU504"
+    }
 }

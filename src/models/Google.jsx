@@ -37,7 +37,7 @@ export function oauthSignIn() {
 }
 
 export async function getBookshelves(token) {
-    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves?key=${googleAPI.api_key}`, {
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves?key=`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
@@ -46,35 +46,36 @@ export async function getBookshelves(token) {
     console.log(data)
     if (!data.items) {
         console.log('retrieving data')
-        return getBookshelves(token)
+        return []
     }
     else {
         console.log(data);
         console.log(data.items)
-        return data.items
+        return data.items || []
     }
 }
 
 export async function getBooksFromShelf(shelf, token) {
-    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/volumes?key=${googleAPI.api_key}`, {
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/volumes?key=`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
     });
     const data = await resp.json();
-    if (data.status === null) {
-        console.log('retrieving data')
-        return getBooksFromShelf(shelf, token)
+    console.log(data)
+    if (!data.totalItems) {
+        console.log('Could not retrieve items')
+        return []
     }
-    else if (data.status === "OK") {
+    else {
         console.log(data);
         console.log(data.items)
-        return data.items
+        return data.items || []
     }
 }
 
 export function addBookToShelf(shelf, bookID, token) {
-    fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/addVolume?volumeId=${bookID}&key=${googleAPI.api_key}`, {
+    fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/addVolume?volumeId=${bookID}&key=`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ export function addBookToShelf(shelf, bookID, token) {
 }
 
 export function removeBookFromShelf(shelf, bookID, token) {
-    fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/removeVolume?volumeId=${bookID}&key=${googleAPI.api_key}`, {
+    fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/removeVolume?volumeId=${bookID}&key=`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -94,7 +95,7 @@ export function removeBookFromShelf(shelf, bookID, token) {
 }
 
 export async function searchBookByISBN(isbn) {
-    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=isbn:${isbn}?key=${googleAPI.api_key}`);
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=isbn:${isbn}?key=`);
     const data = await resp.json();
     if (data.status === null) {
         console.log('retrieving data')
@@ -108,7 +109,7 @@ export async function searchBookByISBN(isbn) {
 }
 
 export async function searchBookByName(bookName) {
-    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=${bookName}?key=${googleAPI.api_key}`);
+    const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=${bookName}?key=`);
     const data = await resp.json();
     if (data.status === null) {
         console.log('retrieving data')

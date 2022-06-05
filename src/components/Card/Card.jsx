@@ -2,24 +2,28 @@ import React from 'react';
 import './Card.css';
 //import PropTypes from 'prop-types';
 
-class Card extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+function Card(props) {
 
-    render() {
-        return (
-            <div onClick={() => {if (this.props.book) { this.props.dropDown(this.props.book) }}} className="Card">
-                <div className="CardImage">
-                    <img className="Image" src={this.props.slide.image} alt="/" />
-                </div>
-                <h2 className="CardName">
-                    {this.props.slide.name}
-                </h2>
+    return (
+        <div onClick={() => { props.callback(props.slide) }} className="Card">
+            <div className="CardImage">
+                {props.slide.image &&
+                    <img className="Image" src={props.slide.image} alt="/" />
+                }
+                {props.slide.books && (props.slide.books.length < 3) && (props.slide.books.length > 0) &&
+                    <img className="BookImage" src={props.slide.books[0].volumeInfo.imageLinks.thumbnail} alt="/" />
+                    // <div className="Row">
+                    //     <div className="Column">
+
+                    //     </div>
+                    // </div>
+                }
             </div>
-        );
-    }
+            <h2 className="CardName">
+                {props.slide.name}
+            </h2>
+        </div>
+    );
 }
 
 Card.propTypes = {};

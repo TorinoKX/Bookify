@@ -2,28 +2,20 @@ import React from 'react';
 import Slider from '../Slider/Slider';
 import './Bestsellers.css'
 import PropTypes from 'prop-types';
-import { useSwiper } from 'swiper/react';
 
-class Bestsellers extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-        
-    }
+function Bestsellers(props) {
+    return (
+        <div className="Bestsellers">
+            <div className="ListTitle">{props.list.name}</div>
+            <Slider slides={props.list.books} callback={() => { console.log("callback") }} />
+            <ul>
+                {props.allLists.map((value, index) => {
+                    return <li key={value + index} onClick={() => { props.changeList(value) }}>{value.display_name}</li>
+                })}
+            </ul>
+        </div>
+    );
 
-    render() {
-        return (
-            <div className="Bestsellers">
-                <div className="ListTitle">{this.props.list.name}</div>
-                <Slider slides={this.props.list.books}/>
-                <ul>
-                    {this.props.allLists.map((value, index) => {
-                        return <li key={value + index} onClick={() => { this.props.changeList(value) } }>{value.display_name}</li>
-                    })}
-                </ul>
-            </div>
-        );
-    }
 }
 
 Bestsellers.propTypes = {
