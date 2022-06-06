@@ -1,0 +1,55 @@
+.Trigger {
+    width: 75%;
+    text-align: center;
+    background-color: #dcbe87;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.DropdownItems {
+    position: relative;
+    top: 100%;
+    left: 0;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    perspective: 1000px;
+    display: none;
+    animation: growDown 350ms ease-in-out forwards;
+    transform-origin: top center;
+}
+
+.DropdownItems.Active {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+@keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    text-align: center;
+}
+
+li:hover {
+    background-color: #F3EBE1;
+    cursor: pointer;
+}

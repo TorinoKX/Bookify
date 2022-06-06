@@ -3,6 +3,7 @@ import * as Nyt from '../../models/Nyt'
 import Bestsellers from '../Bestsellers/Bestsellers';
 import Bookshelves from '../Bookshelves/Bookshelves';
 import Search from '../Search/Search';
+import './Content.css'
 
 function Content() {
 

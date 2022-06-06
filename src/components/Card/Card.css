@@ -1,28 +1,61 @@
+.CardContent {
+    width: 80%;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    background: #F3EBE1;
+    padding: .6em;
+    margin-bottom: 1em;
+    border-radius: .3em;
+    box-shadow: rgba(0, 0, 0, 0.2) 3px 6px 10px;
+    border: solid 1px #ccc;
+}
+
 .Card {
-    width: 15rem; 
-    outline-style: solid; 
-    outline-offset: 2px; 
-    outline-width: 1px; 
-    border-radius: 0.125rem; 
-    margin: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+    overflow: hidden;
 }
 
-.CardImage {
-    --tw-bg-opacity: 1; 
-    background-color: rgb(203 213 225 / var(--tw-bg-opacity)); 
-    width: 15rem; 
-    height: 12rem;
-    display: flex; 
-    justify-content: center;
-}
-
-.Image {
+.img {
+    width: 200px;
+    height: 200px;
     object-fit: contain;
-    width: 15rem;
+    border-radius: .3em;
+    background: linear-gradient(165deg, #dcbe87 0%, #ef5d58 30%, #517174 80%, #325453 100%);
+    opacity: .7;
+    border: solid 1px firebrick;
+    flex: 8;
 }
 
-.CardName {
-    text-align: center; 
-    font-weight: 500; 
-    text-transform: capitalize;
+.CardContent h3 {
+    margin: 0;
+    font-size: 0.9em;
+    flex: 2;
+    max-height: 40px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Row {
+    display: flex;
+    height: 200px;
+    padding: 5px;
+}
+
+.Column {
+    height: 100%;
+    flex: 50%;
+}
+
+.Column img {
+    vertical-align: middle;
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
 }

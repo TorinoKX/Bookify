@@ -1,27 +1,48 @@
 import React from 'react';
 import './Card.css';
+import placeholderImage from '../../images/placeholder-image.png'
 //import PropTypes from 'prop-types';
 
 function Card(props) {
 
     return (
         <div onClick={() => { props.callback(props.slide) }} className="Card">
-            <div className="CardImage">
-                {props.slide.image &&
-                    <img className="Image" src={props.slide.image} alt="/" />
-                }
-                {props.slide.books && (props.slide.books.length < 3) && (props.slide.books.length > 0) &&
-                    <img className="BookImage" src={props.slide.books[0].volumeInfo.imageLinks.thumbnail} alt="/" />
-                    // <div className="Row">
-                    //     <div className="Column">
-
-                    //     </div>
-                    // </div>
-                }
+            <div className="CardContent">
+                <div className="CardImage">
+                    {props.slide.image &&
+                        <img className="img" src={props.slide.image} alt={props.slide.name} />
+                    }
+                    {props.slide.books && (props.slide.books.length < 3) && (props.slide.books.length > 0) &&
+                        <img className="img" src={props.slide.books[0].volumeInfo.imageLinks.thumbnail} alt={props.slide.books[0].volumeInfo.title} />
+                    }
+                    {props.slide.books && (props.slide.books.length >= 3) && (props.slide.books.length > 0) &&
+                        <div className="Row img" >
+                            <div className="Column">
+                                {props.slide.books[0].volumeInfo.imageLinks &&
+                                    <img src={props.slide.books[0].volumeInfo.imageLinks.thumbnail} alt={props.slide.books[0].volumeInfo.title}></img>
+                                }
+                                {props.slide.books[1].volumeInfo.imageLinks &&
+                                    <img src={props.slide.books[1].volumeInfo.imageLinks.thumbnail} alt={props.slide.books[1].volumeInfo.title}></img>
+                                }
+                            </div>
+                            <div className="Column">
+                                {props.slide.books[2].volumeInfo.imageLinks &&
+                                    <img src={props.slide.books[2].volumeInfo.imageLinks.thumbnail} alt={props.slide.books[2].volumeInfo.title}></img>
+                                }
+                                {props.slide.books[3].volumeInfo.imageLinks &&
+                                    <img src={props.slide.books[3].volumeInfo.imageLinks.thumbnail} alt={props.slide.books[3].volumeInfo.title}></img>
+                                }
+                            </div>
+                        </div>
+                    }
+                    {!props.slide.image && props.slide.books.length === 0 &&
+                        <img className="img" src={placeholderImage} alt="placeholder" />
+                    }
+                </div>
+                <h3 className="CardName">
+                    {props.slide.name}
+                </h3>
             </div>
-            <h2 className="CardName">
-                {props.slide.name}
-            </h2>
         </div>
     );
 }

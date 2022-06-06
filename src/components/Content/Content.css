@@ -1,0 +1,13 @@
+@media all and (min-width: 768px) {
+    .Content {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    .Content {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
