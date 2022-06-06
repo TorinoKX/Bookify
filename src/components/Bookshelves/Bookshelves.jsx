@@ -64,9 +64,10 @@ function Bookshelves(props) {
         <div className="Bookshelves">
             <h1 className="ShelvesTitle">Bookshelves</h1>
             {!props.isLoggedIn &&
-                <button onClick={Google.oauthSignIn}>
-                    <p>Login</p>
-                </button>
+                <div className="LoginContainer">
+                    <p>Log Into Google Below To View Your Bookshelves.</p>
+                    <button className="LoginButton" onClick={Google.oauthSignIn}>Login</button>
+                </div>
             }
             {props.isLoggedIn &&
                 <Slider slides={bookShelves.map(el => {
@@ -74,7 +75,7 @@ function Bookshelves(props) {
                 })} callback={dropDown} />
             }
             {bookshelf &&
-                <Bookslist books={bookshelf.books} title={bookshelf.name} callback={confirmDelete} />
+                <Bookslist books={bookshelf.books} title={bookshelf.name} callback={confirmDelete} isBookshelves={true} />
             }
             {displayDeleteModal &&
                 <DeleteModal callback={deleteConfirmed} />

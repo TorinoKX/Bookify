@@ -13,7 +13,7 @@ const Bookslist = (props) => {
                     console.log(book)
                     return (
                         book.volumeInfo.imageLinks &&
-                        <Card slide={{ image: book.volumeInfo.imageLinks.thumbnail, name: book.volumeInfo.title }} bookID={book.id} removeCallback={props.callback} />
+                        <Card slide={{ image: book.volumeInfo.imageLinks.thumbnail, name: book.volumeInfo.title }} bookID={book.id} removeCallback={props.callback} isBookshelves={props.isBookshelves} />
                     );
                 })}
             </div>

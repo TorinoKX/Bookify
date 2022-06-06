@@ -4,7 +4,6 @@
     text-align: center; 
     /* font-weight: 500;  */
     text-transform: capitalize;
-    color: #F3EBE1;
 }
 
 .Bookshelves {
@@ -13,4 +12,27 @@
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     padding: 5px;
+    color: #F3EBE1;
+}
+
+.LoginContainer {
+    align-items: center;
+    height: 100px;
+}
+
+.LoginContainer p {
+    text-align: center;
+}
+
+.LoginButton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 25px;
+    border: none;
+    padding: 10px;
+    background-color: #DCBE87;
+    color: #4E1D04;
+    font-weight: 700;
+    cursor: pointer;
 }

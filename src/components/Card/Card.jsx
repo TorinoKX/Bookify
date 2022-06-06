@@ -7,7 +7,7 @@ function Card(props) {
 
     return (
         <div onClick={() => { props.callback(props.slide); console.log(props) }} className="Card">
-            {props.bookID &&
+            {props.isBookshelves &&
                 <button className="RemoveButton" onClick={() => { props.removeCallback(props.bookID) }}>X</button>
             }
             <div className="CardContent">
