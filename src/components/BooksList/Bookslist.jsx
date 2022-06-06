@@ -4,6 +4,7 @@ import './Bookslist.css'
 // import PropTypes from 'prop-types';
 
 const Bookslist = (props) => {
+
     return (
         <div className="Bookslist">
             <h1>{props.title}</h1>
@@ -12,7 +13,7 @@ const Bookslist = (props) => {
                     console.log(book)
                     return (
                         book.volumeInfo.imageLinks &&
-                        <Card slide={{ image: book.volumeInfo.imageLinks.thumbnail, name: book.volumeInfo.title }} />
+                        <Card slide={{ image: book.volumeInfo.imageLinks.thumbnail, name: book.volumeInfo.title }} bookID={book.id} removeCallback={props.callback} />
                     );
                 })}
             </div>

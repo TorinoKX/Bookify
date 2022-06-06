@@ -79,7 +79,7 @@ export function addBookToShelf(shelf, bookID, token) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authentication': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
     })
 }
@@ -89,7 +89,7 @@ export function removeBookFromShelf(shelf, bookID, token) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authentication': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`
         },
     })
 }

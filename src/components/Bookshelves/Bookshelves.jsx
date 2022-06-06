@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Google from '../../models/Google'
 import Bookslist from '../BooksList/Bookslist';
+import DeleteModal from '../DeleteModal/DeleteModal';
 import Slider from '../Slider/Slider';
 import './Bookshelves.css'
 
@@ -8,8 +9,9 @@ function Bookshelves(props) {
     const [bookShelves, setBookshelves] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [displayedBooks, setDisplayedBooks] = useState([])
-    const [shelfName, setShelfname] = useState("")
+    const [bookshelf, setBookshelf] = useState(null)
+    const [displayDeleteModal, setDelete] = useState(false)
+    const [bookToDelete, setBookToDelete] = useState(null)
 
     let getBookShelves = async () => {
         setIsLoading(true)
@@ -30,10 +32,25 @@ function Bookshelves(props) {
         })
     }
 
+    let deleteConfirmed = (confirmed) => {
+        if (confirmed) {
+            setBookshelf({ id: bookshelf.id, name: bookshelf.name, books: bookshelf.books.filter(el => el.id !== bookToDelete) })
+            Google.removeBookFromShelf(bookshelf.id, bookToDelete, props.accessToken);
+            getBookShelves();
+        }
+        setDelete(false);
+        setBookToDelete(null);
+    }
+
+    let confirmDelete = (bookID) => {
+        console.log(bookID)
+        setDelete(true);
+        setBookToDelete(bookID);
+    }
+
     let dropDown = (bookshelf) => {
         console.log(bookshelf)
-        setDisplayedBooks(bookshelf.books)
-        setShelfname(bookshelf.name)
+        setBookshelf(bookshelf)
     }
 
     useEffect(() => {
@@ -53,10 +70,15 @@ function Bookshelves(props) {
             }
             {props.isLoggedIn &&
                 <Slider slides={bookShelves.map(el => {
-                    return { name: `${el.title}`, books: el.books };
+                    return { name: `${el.title}`, books: el.books, id: el.id };
                 })} callback={dropDown} />
             }
-            <Bookslist books={displayedBooks} title={shelfName}/>
+            {bookshelf &&
+                <Bookslist books={bookshelf.books} title={bookshelf.name} callback={confirmDelete} />
+            }
+            {displayDeleteModal &&
+                <DeleteModal callback={deleteConfirmed} />
+            }
         </div>
     );
 }

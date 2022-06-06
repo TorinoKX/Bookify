@@ -11,10 +11,6 @@ import 'swiper/css/pagination'
 import './Slider.css'
 
 function Slider(props) {
-    let resetSlides = () => {
-        
-    }
-
     return (
         <Swiper
             navigation={true}

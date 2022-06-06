@@ -8,7 +8,7 @@ function Bestsellers(props) {
     return (
         <div className="Bestsellers">
             <div className="ListTitle">
-                <h1>{props.list.name}</h1>
+                <h1>Bestselling {props.list.name}</h1>
             </div>
             {props.list.books &&
                 <Slider slides={props.list.books} callback={() => { console.log("callback") }} />

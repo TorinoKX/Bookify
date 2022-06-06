@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import './Dropdown.css'
+import selectImage from '../../images/list-outline.png'
 // import PropTypes from 'prop-types';
 
 const Dropdown = (props) => {
@@ -10,7 +11,8 @@ const Dropdown = (props) => {
     return (
         <div className="Dropdown">
             <div className="Trigger" onClick={() => { setDropdown(!dropdownActive) }}>
-                <p>Choose Bestseller List <br /> {dropdownActive ? <span>&#8248;</span> : <span>&#43258;</span>}</p>
+                
+                <p><img src={selectImage} alt="Select"></img> Choose Bestseller List</p>
             </div>
             <div className={dropdownActive ? "DropdownItems Active" : "DropdownItems"}>
                 <ul>

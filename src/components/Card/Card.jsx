@@ -6,7 +6,10 @@ import placeholderImage from '../../images/placeholder-image.png'
 function Card(props) {
 
     return (
-        <div onClick={() => { props.callback(props.slide) }} className="Card">
+        <div onClick={() => { props.callback(props.slide); console.log(props) }} className="Card">
+            {props.bookID &&
+                <button className="RemoveButton" onClick={() => { props.removeCallback(props.bookID) }}>X</button>
+            }
             <div className="CardContent">
                 <div className="CardImage">
                     {props.slide.image &&
