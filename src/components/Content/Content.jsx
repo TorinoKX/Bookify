@@ -18,15 +18,18 @@ function Content() {
 	const [chosenBook, setChosenBook] = useState(null);
 	const [isBookshelf, setIsBookshelf] = useState(false);
 
+	//sets the chosen book to the raw data of the given book (called from bestseller's children)
 	let callback = (book) => {
 		setChosenBook(book.raw);
 	};
 
+	//clears the chosen book and resets the isBookshelf variable
 	let closeCallback = () => {
 		setIsBookshelf(false);
 		setChosenBook(null);
 	};
 
+	//Initialises the Nyt lists and sets the default list to the first one supplied by the api
 	let initLists = () => {
 		console.log('initLists');
 		Nyt.getLists().then(listData => {
@@ -47,6 +50,7 @@ function Content() {
 		setGotSlides(true);
 	};
 
+	//changes the displayed list
 	let changeList = (list) => {
 		Nyt.getListBooks(list.list_name_encoded).then(bookData => {
 			setList(
@@ -60,6 +64,7 @@ function Content() {
 		});
 	};
 
+	//Checks if the access token is in the url, if it is then sets the accessToken and loggedIn variables
 	let checkLoggedIn = () => {
 		var urlParams = new URLSearchParams(window.location.hash.replace('#', '?'));
 		console.log(urlParams);
@@ -76,6 +81,7 @@ function Content() {
 		}
 	};
 
+	//Adds a book to user's favorites library based in isbn
 	let addToLibrary = (isbn) => {
 		if (accessToken) {
 			const searchPromise = Google.searchBookByISBN(isbn);
@@ -90,10 +96,12 @@ function Content() {
 		}
 	};
 
+	//resets the refresh variable to false
 	let resetRefresh = () => {
 		setRefresh(false);
 	};
 
+	//parses a google book into the format used in BookDetails and sets it to the chosen book
 	let bookshelfBook = (data) => {
 		console.log(data.raw);
 		setIsBookshelf(true);

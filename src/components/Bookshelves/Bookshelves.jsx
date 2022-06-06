@@ -13,6 +13,7 @@ function Bookshelves(props) {
 	const [displayDeleteModal, setDelete] = useState(false);
 	const [bookToDelete, setBookToDelete] = useState(null);
 
+	//Gets user's google bookshelves and attaches the books for each shelf (used for images and the bookslist)
 	let getBookShelves = async () => {
 		setIsLoading(true);
 		const retrievedBookshelves = await Google.getBookshelves(props.accessToken);
@@ -32,6 +33,7 @@ function Bookshelves(props) {
 		});
 	};
 
+	//If a book deletion was confirmed, will remove the book and refresh the bookshelves, otherwise nothing happens
 	let deleteConfirmed = (confirmed) => {
 		if (confirmed) {
 			setBookshelf({ id: bookshelf.id, name: bookshelf.name, books: bookshelf.books.filter(el => el.id !== bookToDelete) });
@@ -42,12 +44,14 @@ function Bookshelves(props) {
 		setBookToDelete(null);
 	};
 
+	//preps the book for deletion and enables the delete modal
 	let confirmDelete = (bookID) => {
 		console.log(bookID);
 		setDelete(true);
 		setBookToDelete(bookID);
 	};
 
+	//sets the bookshelf to be displayed in the dropdown
 	let dropDown = (bookshelf) => {
 		console.log(bookshelf);
 		setBookshelf(bookshelf);
