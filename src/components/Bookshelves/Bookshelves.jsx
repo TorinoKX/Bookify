@@ -73,6 +73,10 @@ function Bookshelves(props) {
 	return (
 		<div className="Bookshelves">
 			<h1 className="ShelvesTitle">Bookshelves</h1>
+			{props.isLoggedIn &&
+				//You cannot log out of the google oauth without signing the user completely out of google, this is my workaround
+				<a href="/"><button className="LogoutButton">LogOut</button></a>
+			}
 			{!props.isLoggedIn &&
                 <div className="LoginContainer">
                 	<p>Log Into Google Below To View Your Bookshelves.</p>
