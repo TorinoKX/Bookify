@@ -73,9 +73,12 @@ function Content() {
 
     return (
         <div className="Content">
+            <h1 className="Title">Bookify</h1>
             <Search />
-            <Bestsellers list={list} allLists={allLists} changeList={changeList} />
-            <Bookshelves isLoggedIn={isLoggedIn} accessToken={accessToken} />
+            <div className="ContentWrapper">
+                <Bestsellers list={list} allLists={allLists} changeList={changeList} />
+                <Bookshelves isLoggedIn={isLoggedIn} accessToken={accessToken} />
+            </div>
         </div>
     );
 }

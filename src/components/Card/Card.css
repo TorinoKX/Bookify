@@ -12,11 +12,17 @@
 }
 
 .Card {
+    width: 280px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     text-align: center;
     overflow: hidden;
+}
+
+.CardImage {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .img {
@@ -31,12 +37,14 @@
 }
 
 .CardContent h3 {
+    color: #325453;
     margin: 0;
     font-size: 0.9em;
+    font-weight: 800;
     flex: 2;
     max-height: 40px;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

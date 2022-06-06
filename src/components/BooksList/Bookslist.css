@@ -1,0 +1,10 @@
+.BookCards {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.Bookslist h1 {
+    text-align: center;
+}

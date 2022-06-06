@@ -1,19 +1,21 @@
 import React from 'react';
+import Card from '../Card/Card'
+import './Bookslist.css'
 // import PropTypes from 'prop-types';
 
 const Bookslist = (props) => {
     return (
         <div className="Bookslist">
-            {props.books.map((book, index) => {
-                console.log(book)
-                return (
-                    book.volumeInfo.imageLinks &&
-                    <figure key={index}>
-                        <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} height="200" width="200" />
-                        <figcaption>{book.volumeInfo.title}</figcaption>
-                    </figure>
-                );
-            })}
+            <h1>{props.title}</h1>
+            <div className="BookCards">
+                {props.books.map((book, index) => {
+                    console.log(book)
+                    return (
+                        book.volumeInfo.imageLinks &&
+                        <Card slide={{ image: book.volumeInfo.imageLinks.thumbnail, name: book.volumeInfo.title }} />
+                    );
+                })}
+            </div>
         </div>
     );
 };

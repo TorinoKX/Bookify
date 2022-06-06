@@ -9,6 +9,7 @@ function Bookshelves(props) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [displayedBooks, setDisplayedBooks] = useState([])
+    const [shelfName, setShelfname] = useState("")
 
     let getBookShelves = async () => {
         setIsLoading(true)
@@ -32,6 +33,7 @@ function Bookshelves(props) {
     let dropDown = (bookshelf) => {
         console.log(bookshelf)
         setDisplayedBooks(bookshelf.books)
+        setShelfname(bookshelf.name)
     }
 
     useEffect(() => {
@@ -43,7 +45,7 @@ function Bookshelves(props) {
 
     return (
         <div className="Bookshelves">
-            <h1 className="Title">Bookshelves</h1>
+            <h1 className="ShelvesTitle">Bookshelves</h1>
             {!props.isLoggedIn &&
                 <button onClick={Google.oauthSignIn}>
                     <p>Login</p>
@@ -54,7 +56,7 @@ function Bookshelves(props) {
                     return { name: `${el.title}`, books: el.books };
                 })} callback={dropDown} />
             }
-            <Bookslist books={displayedBooks}/>
+            <Bookslist books={displayedBooks} title={shelfName}/>
         </div>
     );
 }
