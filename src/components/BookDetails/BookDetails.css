@@ -1,0 +1,94 @@
+.BookDetails {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    color: black;
+}
+
+.DetailBody {
+    border-radius: 30px;
+    position: absolute;
+    background-color: #F3EBE1;
+    width: 70%;
+    height: 80%;
+    align-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.AddLibrary {
+    position: absolute;
+    bottom: 30px;
+    left: 20%;
+    border-style: none;
+    border-radius: 25px;
+    background-color: #AD6A34;
+    color: white;
+    font-size: large;
+    font-weight: 600;
+    padding: 5px;
+}
+
+.AddLibrary:hover {
+    cursor: pointer;
+}
+
+.AddLibrary.bookShelf {
+    display: none;
+}
+
+.StorePage {
+    position: absolute;
+    bottom: 30px;
+    right: 20%;
+    border-style: none;
+    border-radius: 25px;
+    background-color: #517174;
+    color: white;
+    font-size: large;
+    font-weight: 600;
+    padding: 5px;
+}
+
+.StorePage:hover {
+    cursor: pointer;
+}
+
+.StorePage.bookShelf {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.CloseDetails {
+    border-radius: 20px;
+    border-style: none;
+    background-color: #EF5D58;
+    color: #325453;
+    font-weight: 900;
+    text-align: center;
+    position: absolute;
+    top: 40px;
+    right: 50px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.DetailImg {
+    height: 230px;
+    top: 15px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.DetailContent {
+    margin-top: 250px;
+    padding: 15px;
+    text-align: center;
+}
