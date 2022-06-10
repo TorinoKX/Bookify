@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Important Information
 
-This project relies on a proxy server that is inactive. Code modifications will be needed if attempting to make this functional.
+This project relies on a proxy server that is inactive. Code modifications will be needed if attempting to make this functional. Code has been edited to point to user's localhost.
 
 ## Available Scripts
 

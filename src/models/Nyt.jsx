@@ -1,6 +1,6 @@
 
 export async function getLists() {
-	const resp = await fetch('https://s5038261.elf.ict.griffith.edu.au:3001/nyt/lists/names.json?api-key=');
+	const resp = await fetch('https://localhost:3001/nyt/lists/names.json?api-key=');
 	const data = await resp.json();
 	if (data.status === null) {
 		console.log('retrieving data');
@@ -14,7 +14,7 @@ export async function getLists() {
 }
 
 export async function getListBooks(listName) {
-	const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/nyt/lists/current/${listName}.json?api-key=`);
+	const resp = await fetch(`https://localhost:3001/nyt/lists/current/${listName}.json?api-key=`);
 	const data = await resp.json();
 	if (data.status === null) {
 		console.log('retrieving data');

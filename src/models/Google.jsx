@@ -37,7 +37,7 @@ export function oauthSignIn() {
 }
 
 export async function getBookshelves(token) {
-	const resp = await fetch('https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves?key=', {
+	const resp = await fetch('https://localhost:3001/gbooks/mylibrary/bookshelves?key=', {
 		headers: {
 			'Authorization': `Bearer ${token}`
 		}
@@ -56,7 +56,7 @@ export async function getBookshelves(token) {
 }
 
 export async function getBooksFromShelf(shelf, token) {
-	const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/volumes?key=`, {
+	const resp = await fetch(`https://localhost:3001/gbooks/mylibrary/bookshelves/${shelf}/volumes?key=`, {
 		headers: {
 			'Authorization': `Bearer ${token}`
 		}
@@ -75,7 +75,7 @@ export async function getBooksFromShelf(shelf, token) {
 }
 
 export function addBookToShelf(shelf, bookID, token) {
-	fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/addVolume?volumeId=${bookID}&key=`, {
+	fetch(`https://localhost:3001/gbooks/mylibrary/bookshelves/${shelf}/addVolume?volumeId=${bookID}&key=`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export function addBookToShelf(shelf, bookID, token) {
 }
 
 export function removeBookFromShelf(shelf, bookID, token) {
-	fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/mylibrary/bookshelves/${shelf}/removeVolume?volumeId=${bookID}&key=`, {
+	fetch(`https://localhost:3001/gbooks/mylibrary/bookshelves/${shelf}/removeVolume?volumeId=${bookID}&key=`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ export function removeBookFromShelf(shelf, bookID, token) {
 }
 
 export async function searchBookByISBN(isbn) {
-	const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=isbn:${isbn}&key=`);
+	const resp = await fetch(`https://localhost:3001/gbooks/volumes?q=isbn:${isbn}&key=`);
 	const data = await resp.json();
 	if (!data.items) {
 		console.log('Could not retrieve items');
@@ -110,7 +110,7 @@ export async function searchBookByISBN(isbn) {
 }
 
 export async function searchBookByName(bookName) {
-	const resp = await fetch(`https://s5038261.elf.ict.griffith.edu.au:3001/gbooks/volumes?q=${bookName}&key=`);
+	const resp = await fetch(`https://localhost:3001/gbooks/volumes?q=${bookName}&key=`);
 	const data = await resp.json();
 	if (!data.items) {
 		console.log('Could not retrieve items');
