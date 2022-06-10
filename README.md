@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Important Information
+
+This project relies on a proxy server that is inactive. Code modifications will be needed if attempting to make this functional.
+
 ## Available Scripts
 
 In the project directory, you can run:
